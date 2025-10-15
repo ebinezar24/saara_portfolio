@@ -65,12 +65,10 @@ function closeUsernamePopup() {
     document.body.style.overflow = "auto";
 }
 
-// Show popup after 2 seconds on page load and hide after 2 seconds
+// Show popup immediately on page load and hide after 3 seconds
 window.addEventListener('load', function() {
-    setTimeout(function() {
-        showUsernamePopup();
-        setTimeout(closeUsernamePopup, 2000);
-    }, 2000);
+    showUsernamePopup();
+    setTimeout(closeUsernamePopup, 3000);
 });
 
 // Close popup when clicking outside of it
