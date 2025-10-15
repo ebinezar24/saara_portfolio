@@ -52,6 +52,41 @@ document.querySelectorAll('nav a').forEach(anchor => {
     });
 });
 
+// Username Popup Functions
+function showUsernamePopup() {
+    const popup = document.getElementById("usernamePopup");
+    popup.style.display = "block";
+    document.body.style.overflow = "hidden";
+}
+
+function closeUsernamePopup() {
+    const popup = document.getElementById("usernamePopup");
+    popup.style.display = "none";
+    document.body.style.overflow = "auto";
+}
+
+// Show popup after 2 seconds on page load and hide after 2 seconds
+window.addEventListener('load', function() {
+    setTimeout(function() {
+        showUsernamePopup();
+        setTimeout(closeUsernamePopup, 2000);
+    }, 2000);
+});
+
+// Close popup when clicking outside of it
+window.onclick = function(event) {
+    const modal = document.getElementById("videoModal");
+    const popup = document.getElementById("usernamePopup");
+    if (event.target == modal) {
+        modal.style.display = "none";
+        document.getElementById("videoFrame").src = "";
+        document.body.style.overflow = "auto";
+    }
+    if (event.target == popup) {
+        closeUsernamePopup();
+    }
+}
+
 // Add scroll animation to sections
 const observerOptions = {
     threshold: 0.1,
@@ -68,4 +103,9 @@ const observer = new IntersectionObserver(function(entries) {
     });
 }, observerOptions);
 
-// Observe
+// Observe sections for scroll animation
+document.querySelectorAll('section').forEach(section => {
+    section.style.opacity = '0';
+    section.style.transform = 'translateY(20px)';
+    observer.observe(section);
+});
